@@ -45,7 +45,20 @@ export class UserService {
         try {
             if(!userName || !data) return { message: 'You cant add a game with out user name or game data'}
             const newGame = await this.userModel.addGame(userName, data);
-            return newGame
+            return newGame;
+        } catch (error) {
+            const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
+            loggerInfo.error(message);
+            return {error: message};
+        }
+    }
+
+    public async getUser (userName: any) {
+
+        try {
+            if(!userName ) return { message: 'Its no user name on your payload'}
+            const user = await this.userModel.getUser(userName);
+            return user;
         } catch (error) {
             const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
             loggerInfo.error(message);

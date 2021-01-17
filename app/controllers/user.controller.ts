@@ -41,7 +41,15 @@ export class UserController {
         }
     }
 
-    public get(req: IGetUserAuthInfoRequest, res:Response) {
+    public async get(req: IGetUserAuthInfoRequest, res:Response) {
 
+        try {
+            const response = await new UserService().getUser(req.user);
+            res.send(response);
+        } catch (error) {
+            const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
+            loggerInfo.error(message);
+            res.send({error: error.name, message: error.message, status: error.status || 500});
+        }
     }
 }

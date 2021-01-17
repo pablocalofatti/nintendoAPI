@@ -12,5 +12,5 @@ Mongoose.connect(`${db.common.database.host}:${db.common.database.port}/${db.com
         loggerInfo.info('MongoDb connected');    
     })
     .catch((error) => {
-        loggerInfo.info(`Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`);
+        loggerInfo.error(`Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`);
     })

@@ -1,18 +1,23 @@
 import mongoose, { Schema } from 'mongoose';
-import { IGame } from './game.schema';
 
 export interface IUser extends mongoose.Document {
-    username: string;
+    userName: string;
     email: string;
     password: string;
-    favoriteGames: IGame[];
+    favoriteGames: {};
 }
 
 const UserSchema = new Schema({
-    username: String,
+    userName: {type: String, unique: true, trim: true, required: true},
     email: String,
-    password: String,
-    favoriteGames: [{ type: Schema.Types.ObjectId, ref: "Game"}]
+    password: {type: String, unique: true, trim: true, required: true},
+    favoriteGames: [{
+        title:{type: String},
+        membership:{type: Boolean},
+        coverPicture:{type: String},
+        keywords:{type: String},
+        minimumAge:{type: Number},
+    }]
 });
 
 export default mongoose.model<IUser>('User', UserSchema);

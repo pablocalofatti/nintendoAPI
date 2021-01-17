@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { GameController } from '../controllers';
+import AuthMiddleware from '../middleware/auth';
+
 
 const router = Router();
 const gameController = new GameController();
 
-router.get('/', gameController.getAll);
+router.get('/', AuthMiddleware, gameController.getAll);
 
 export default router;

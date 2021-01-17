@@ -25,7 +25,7 @@ export class GameService {
             return { games, hasError: false };
         } catch (error) { 
             const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
-            loggerInfo.info(message);
+            loggerInfo.error(message);
             return {error: message, hasError: true};
         }
 

@@ -1,21 +1,47 @@
-import { Request, Response } from 'express';
-
+import { Response, NextFunction} from 'express';
+import { UserService } from '../services/index';
+import loggerInfo from "../logger/bunyan";
+import { IGetUserAuthInfoRequest } from '../interfaces/index';
 
 export class UserController {
 
-    public register(req: Request, res:Response) {
+    public async register(req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) {
 
+        try {
+            const response = await new UserService().create(req.body);
+            res.send(response);
+        } catch (error) {
+            const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
+            loggerInfo.error(message);
+            res.send({error: error.name, message: error.message, status: error.status || 500});
+        }
     }
 
-    public authenticate(req: Request, res:Response) {
+    public async authenticate(req: IGetUserAuthInfoRequest, res:Response) {
 
+        try {
+            const response = await new UserService().login(req.body);
+            res.send(response);
+        } catch (error) {
+            const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
+            loggerInfo.error(message);
+            res.send({error: error.name, message: error.message, status: error.status || 500});
+        }
     }
 
-    public addGame(req: Request, res:Response) {
+    public async addGame(req: IGetUserAuthInfoRequest, res:Response) {
 
+        try {
+            const response = await new UserService().addNewGame(req.body, req.user);
+            res.send(response);
+        } catch (error) {
+            const message = `Error: ${error.name} Message: ${error.message} Status Code: ${error.status}`;
+            loggerInfo.error(message);
+            res.send({error: error.name, message: error.message, status: error.status || 500});
+        }
     }
 
-    public get(req: Request, res:Response) {
+    public get(req: IGetUserAuthInfoRequest, res:Response) {
 
     }
 }

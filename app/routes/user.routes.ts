@@ -6,8 +6,8 @@ const router = Router();
 const userController = new UserController();
 
 
-router.post('/', userController.register);
-router.post('/authenticate', userController.authenticate)
+router.post('/create', userController.register);
+router.post('/login', userController.authenticate)
 router.put('/add-game', AuthMiddleware, userController.addGame)
 router.get('/', AuthMiddleware, userController.get)
 

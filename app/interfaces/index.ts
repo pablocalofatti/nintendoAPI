@@ -1,0 +1,1 @@
+export { IGame } from './IGame';

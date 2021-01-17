@@ -9,7 +9,6 @@ if (ENVIRONMENT !== 'production') {
 }
 
 const configFile = `./${ENVIRONMENT}`;
-
 const isObject = (variable: any) => variable instanceof Object;
 
 /*
@@ -50,5 +49,7 @@ const config = {
     },
   }
 };
-const customConfig = require(configFile).config;
-export default assignObject(customConfig, config);
+const customConfig = require(configFile);
+const configResult = assignObject(customConfig, config);
+
+export default configResult

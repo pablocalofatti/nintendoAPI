@@ -8,7 +8,6 @@ export class GameService {
     public async getAll(count = 30, offset = 0) {
 
         const url = this.baseUrl+`count=${count}&offset=${offset}`;
-        console.log("ASDASDSA SERVICE")
         
         try {
             const { data } = await axios.get(url);

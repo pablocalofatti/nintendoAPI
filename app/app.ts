@@ -2,6 +2,9 @@ import Express from 'express';
 import BodyParser from 'body-parser';
 import Cors from 'cors';
 
+//start mongodb
+import './db/db';
+
 const app = Express();
 
 app.use(BodyParser.json());
